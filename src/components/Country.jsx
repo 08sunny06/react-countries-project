@@ -5,15 +5,9 @@ import { useNavigate } from "react-router-dom";
 const Country = ({ country }) => {
   const navigate = useNavigate()
 
-  // let [countryData, setCountryData] = useState({})
-
-  // let changeCountry = () => setCountryData(country)
-
   const changeCountry = () => {
     navigate(`/country/${country.name.common}`)
   }
-
-  // console.log(countryData)
 
   return (
     <div className="mx-10 my-10 shadow rounded-lg bg-white" onClick={changeCountry} >
