@@ -1,12 +1,11 @@
 import Navbar from "../components/Navbar";
-import  SearchBar from "../components/SearchBar";
 import  CountriesComp  from "../components/CountriesComp";
 
-const HomePage = () => {
+const HomePage = ({isDark, setIsDark}) => {
   return (
     <>
-      <Navbar />
-      <CountriesComp />
+      <Navbar isDark={isDark} setIsDark={setIsDark} />
+      <CountriesComp isDark={isDark} />
     </>
   );
 };

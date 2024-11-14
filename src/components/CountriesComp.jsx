@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import Country from "./Country";
 
-const CountriesComp = () => {
+const CountriesComp = ({isDark}) => {
   let [countries, setCountry] = useState([]);
   const [loading, setLoading] = useState(true);
   let [region, setRegion] = useState("");
@@ -32,10 +32,10 @@ const CountriesComp = () => {
 
   return (
     <>
-      <SearchBar setRegion={setRegion} setSearch={setSearch} />
-      <div className="grid grid-cols-4 bg-customGray" >
+      <SearchBar setRegion={setRegion} setSearch={setSearch} isDark={isDark} />
+      <div className={`grid grid-cols-4 ${isDark ? 'bg-[#202c37]': 'bg-customGray'}`} >
         {filteredCountries.map((country) => (
-          <Country country={country} key={country.cca3} />
+          <Country country={country} key={country.cca3} isDark={isDark} />
         ))}
       </div>
     </>

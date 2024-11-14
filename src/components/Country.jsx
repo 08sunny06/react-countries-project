@@ -1,16 +1,11 @@
 import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate}from 'react-router-dom'
 
-const Country = ({ country }) => {
+const Country = ({ country, isDark }) => {
   const navigate = useNavigate()
 
-  const changeCountry = () => {
-    navigate(`/country/${country.name.common}`)
-  }
-
   return (
-    <div className="mx-10 my-10 shadow rounded-lg bg-white" onClick={changeCountry} >
+    <div className={`mx-10 my-10 shadow rounded-lg ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`} onClick={() => navigate(`/countryDetails/${country.cca3}`)} >
       <img
         className="w-96 h-60 object-cover rounded-t-lg"
         src={country.flags.svg}
