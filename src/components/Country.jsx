@@ -5,7 +5,7 @@ const Country = ({ country, isDark }) => {
   const navigate = useNavigate()
 
   return (
-    <div className={`mx-10 my-10 shadow rounded-lg ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`} onClick={() => navigate(`/countryDetails/${country.cca3}`)} >
+    <div className={`sm:countryDesktop my-0 mx-24 shadow rounded-lg cursor-pointer ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`} onClick={() => navigate(`/countryDetails/${country.cca3}`)} >
       <img
         className="w-96 h-60 object-cover rounded-t-lg"
         src={country.flags.svg}
@@ -15,7 +15,7 @@ const Country = ({ country, isDark }) => {
       <p className="mx-6 my-2">Population: {country.population}</p>
       <p className="mx-6 my-2">Region: {country.region}</p>
       {country.capital && (
-        <p className="mx-6 my-2 mb-16">Capital: {country.capital}</p>
+        <p className="mx-6 my-2 sm:cardsCountryBorder mb-20 pb-12 ">Capital: {country.capital}</p>
       )}
     </div>
   );

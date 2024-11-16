@@ -2,6 +2,7 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import HomePage from "./pages/HomePage";
 import { useState } from 'react';
 import CountryDetails from './components/CountryDetails';
+import MainLayout from './Layout/MainLayout';
 
 
 const App = () => {
@@ -10,8 +11,10 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<HomePage isDark={isDark} setIsDark={setIsDark} />} />
-        <Route path={`/countryDetails/:id`} element={<CountryDetails isDark={isDark} />} />
+        <Route path='/' element={<MainLayout isDark={isDark} setIsDark={setIsDark} />}>
+          <Route index element={<HomePage isDark={isDark} />} />
+          <Route path={`/countryDetails/:id`} element={<CountryDetails isDark={isDark} />} />
+        </Route>
       </Routes>
     </Router>
   );

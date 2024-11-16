@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import Navbar from "./Navbar";
 import Borders from "./Borders";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router-dom";
 
-const CountryDetails = ({isDark}) => {
+const CountryDetails = ({ isDark }) => {
   let navigate = useNavigate();
   const { id } = useParams();
   const [country, setNewCountry] = useState({});
@@ -19,21 +18,26 @@ const CountryDetails = ({isDark}) => {
   }, [id]);
 
   return (
-    <div className={`${isDark ? "bg-[#202c39]" : "bg-white"} ${isDark ? "text-white" : "text-black"} h-screen`}>
-      <Navbar isDark={isDark} />
+    <div
+      className={`sm:countryDetailsParent px-4 sm:py-16 py-10  h-full ${
+        isDark ? "bg-[#202c39]" : "bg-customGray"
+      } ${isDark ? "text-white" : "text-black"} `}
+    >
       <button
-        className={`flex w-1/7 py-2 px-7 mx-16 my-16 shadow-md rounded-md items-center ${isDark ? "bg-[#2b3945]" : "bg-white"} ${isDark ? "text-white" : "text-black"}`}
-        onClick={() => navigate(-1)}
+        className={`flex w-1/7 sm:mx-16 mx-10 py-2 px-7 shadow-md rounded-md items-center ${
+          isDark ? "bg-[#2b3945]" : "bg-white"
+        } ${isDark ? "text-white" : "text-black"}`}
+        onClick={() => navigate("/")}
       >
         <FaArrowLeftLong />
-        <h1 className="mx-4 mr-0">Back</h1>
+        <h1 className=" mx-4 mr-0">Back</h1>
       </button>
 
-      <div className={`flex justify-center items-center my-8 `}>
-        <div className="w-2/5">
+      <div className={`sm:countryDetailsChild `}>
+        <div className="sm:w-[50rem] sm:h-[30rem] w-[30rem] px-4 mx-6 my-16">
           {Object.keys(country).length > 0 ? (
             <img
-              className="block"
+              className="w-full h-full"
               src={country[0].flags.svg}
               alt={country[0].flags.alt}
             />
@@ -41,7 +45,7 @@ const CountryDetails = ({isDark}) => {
             <p>Loading...</p>
           )}
         </div>
-        <div className={`w-1/3 mx-16 `}>
+        <div className={`sm:countryName mx-10 `}>
           {Object.keys(country).length > 0 ? (
             <h1 className="my-8 font-black text-4xl">
               {country[0].name.common}
@@ -49,7 +53,7 @@ const CountryDetails = ({isDark}) => {
           ) : (
             <p>Loading..0</p>
           )}
-          <div className="flex justify-between">
+          <div className="sm:countryMainDetails ">
             <div>
               {Object.keys(country).length > 0 ? (
                 <p className="py-1">
@@ -93,7 +97,7 @@ const CountryDetails = ({isDark}) => {
             </div>
             <div>
               {Object.keys(country).length > 0 ? (
-                <p className="py-1">
+                <p className="sm:py-1 pt-16">
                   <span className="font-bold">Top Level Domain:</span>{" "}
                   {country[0].tld}
                 </p>
@@ -120,7 +124,7 @@ const CountryDetails = ({isDark}) => {
           </div>
           <div>
             {Object.keys(country).length > 0 ? (
-              <p className="py-4 my-4">
+              <p className="sm:py-4 pt-10 my-4">
                 <span className="font-bold text-md">Border Countries:</span>{" "}
                 {country[0].borders ? (
                   <Borders isDark={isDark} borders={country[0].borders} />

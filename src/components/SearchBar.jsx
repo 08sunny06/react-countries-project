@@ -1,34 +1,62 @@
 import { GoSearch } from "react-icons/go";
 
-const SearchBar = ({ setRegion, setSearch, isDark }) => {
-  let changeRegion = (e) => setRegion(e.target.value);
+const SearchBar = ({ setSearch, setRegion, subRegionData, setSubRegion, setSorting, isDark }) => {
   let searchData = (e) => setSearch(e.target.value);
+  let changeRegion = (e) => setRegion(e.target.value);
+  let changeSubRegion = (e) => setSubRegion(e.target.value)
+  let sortingFunction = (e) => setSorting(e.target.value)
+  
 
   return (
-    <div className={`flex justify-between px-10 py-14 ${isDark ? 'bg-[#202c37]': 'bg-customGray'}`}>
+    <div className={`flex sm:searchBarDesktop searchBarMobile ${isDark ? 'bg-[#202c37]': 'bg-customGray'}`}>
       <div className={` shadow py-2 ${isDark ? 'bg-[#2b3945]': 'bg-white'}`}>
         <GoSearch className="inline mx-8" />
         <input
           type="text"
           placeholder="Search for a country"
-          className={`cursor-pointer ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-black': 'text-white'}`}
+          className={`cursor-pointer ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`}
           onChange={searchData}
         />
       </div>
-      <select
-        onClick={changeRegion}
-        name="region"
-        id="region"
-        className={`py-2 px-8 shadow ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`}
-      >
-        <option value="">Filter by Region</option>
-        <option value="Africa">Africa</option>
-        <option value="Americas">Americas</option>
-        <option value="Europe">Europe</option>
-        <option value="Asia">Asia</option>
-        <option value="Antarctic">Antarctic</option>
-        <option value="Oceania">Oceania</option>
-      </select>
+      <div>
+        <select 
+          onClick={changeRegion}
+          name="region"
+          id="region"
+          className={`sm:filterDesktop filterMobile mx-8 ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`}
+        >
+          <option value="">Filter by Region</option>
+          <option value="Africa">Africa</option>
+          <option value="Americas">Americas</option>
+          <option value="Europe">Europe</option>
+          <option value="Asia">Asia</option>
+          <option value="Antarctic">Antarctic</option>
+          <option value="Oceania">Oceania</option>
+        </select>
+        <select
+          onClick={changeSubRegion}
+          name="subRegion"
+          id="subRegion"
+          className={`sm:filterSubRegion filterMobile ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`}
+        >
+          <option value="">Filter by SubRegion</option>
+          {subRegionData.map(item => (
+            <option value={item} key={item}>{item}</option>
+          ))}
+        </select>
+        <select 
+          onClick={sortingFunction}
+          name="sorting"
+          id="sorting"
+          className={`sm:sorting filterMobile mx-8 ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`}
+        >
+          <option value="">Sorting</option>
+          <option value="populationAscen">Sorting of Population in Ascending Order</option>
+          <option value="populationDescen">Sorting of Population in Descending Order</option>
+          <option value="areaAscen">Sorting of Area in Ascending Order</option>
+          <option value="areaDescen">Sorting of Area in Descending Order</option>
+        </select>
+      </div>
     </div>
   );
 };

@@ -1,13 +1,13 @@
-import { CiDark } from "react-icons/ci";
+import { MdOutlineDarkMode } from "react-icons/md";
 
 const Navbar = ({ isDark, setIsDark }) => {
   return (
     <div
-      className={`flex justify-between py-4 px-8 shadow ${isDark ? "bg-[#2b3945]" : "bg-white"} ${isDark ? "text-white" : "text-black"}`}>
+      className={`flex justify-between py-6 px-8 shadow ${isDark ? "bg-[#2b3945]" : "bg-white"} ${isDark ? "text-white" : "text-black"}`}>
       <h1 className={`font-bold `}>Where in the world?</h1>
-      <div className={`flex text-sm `} onClick={() => setIsDark((prev) => !prev)} >
-        <CiDark className="my-1 mx-1" />
-        <p>Dark Mode</p>
+      <div className={`flex text-sm cursor-pointer `} onClick={() => setIsDark((prev) => !prev)} >
+        <MdOutlineDarkMode className={`my-1 mx-1 `} />
+        {isDark ? <p>Dark Mode</p>: <p>LightMode</p> }
       </div>
     </div>
   );
@@ -15,7 +15,3 @@ const Navbar = ({ isDark, setIsDark }) => {
 
 export default Navbar;
 
-const num = 3;
-const str = `the number is ${num}`;
-const styl1 = "dark";
-const styl2 = "light";

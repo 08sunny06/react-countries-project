@@ -1,10 +1,9 @@
 import Navbar from "../components/Navbar";
 import  CountriesComp  from "../components/CountriesComp";
 
-const HomePage = ({isDark, setIsDark}) => {
+const HomePage = ({isDark}) => {
   return (
-    <>
-      <Navbar isDark={isDark} setIsDark={setIsDark} />
+    <>      
       <CountriesComp isDark={isDark} />
     </>
   );
