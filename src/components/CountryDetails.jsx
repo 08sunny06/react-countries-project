@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import Borders from "./Borders";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { useNavigate, useParams } from "react-router-dom";
+import { themeContext } from "../App";
+import { useContext } from "react";
 
-const CountryDetails = ({ isDark }) => {
+const CountryDetails = () => {
   let navigate = useNavigate();
   const { id } = useParams();
   const [country, setNewCountry] = useState({});
+  const { isDark } = useContext(themeContext)
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -19,12 +22,12 @@ const CountryDetails = ({ isDark }) => {
 
   return (
     <div
-      className={`sm:countryDetailsParent px-4 sm:py-16 py-10  h-full ${
+      className={`sm:countryDetailsParent px-4 sm:py-16 py-10  h-full w-full ${
         isDark ? "bg-[#202c39]" : "bg-customGray"
       } ${isDark ? "text-white" : "text-black"} `}
     >
       <button
-        className={`flex w-1/7 sm:mx-16 mx-10 py-2 px-7 shadow-md rounded-md items-center ${
+        className={`flex w-1/7 sm:mx-16 mx-2 py-2 px-7 shadow-md rounded-md items-center ${
           isDark ? "bg-[#2b3945]" : "bg-white"
         } ${isDark ? "text-white" : "text-black"}`}
         onClick={() => navigate("/")}
@@ -34,7 +37,7 @@ const CountryDetails = ({ isDark }) => {
       </button>
 
       <div className={`sm:countryDetailsChild `}>
-        <div className="sm:w-[50rem] sm:h-[30rem] w-[30rem] px-4 mx-6 my-16">
+        <div className="sm:w-[50rem] sm:h-[30rem] w-[28rem] px-2  my-16">
           {Object.keys(country).length > 0 ? (
             <img
               className="w-full h-full"
@@ -45,7 +48,7 @@ const CountryDetails = ({ isDark }) => {
             <p>Loading...</p>
           )}
         </div>
-        <div className={`sm:countryName mx-10 `}>
+        <div className={`sm:countryName mx-2 `}>
           {Object.keys(country).length > 0 ? (
             <h1 className="my-8 font-black text-4xl">
               {country[0].name.common}

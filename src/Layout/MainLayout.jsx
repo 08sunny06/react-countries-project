@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
-const MainLayout = ({isDark, setIsDark}) => {
+const MainLayout = () => {
   return (
     <>
-      <Navbar isDark={isDark} setIsDark={setIsDark} />
+      <Navbar />
       <Outlet />
     </>
   );

@@ -1,11 +1,14 @@
 import { GoSearch } from "react-icons/go";
+import { themeContext } from "../App";
+import { useContext } from "react";
 
-const SearchBar = ({ setSearch, setRegion, subRegionData, setSubRegion, setSorting, isDark }) => {
+const SearchBar = ({ setSearch, setRegion, subRegionData, setSubRegion, setSorting }) => {
   let searchData = (e) => setSearch(e.target.value);
   let changeRegion = (e) => setRegion(e.target.value);
   let changeSubRegion = (e) => setSubRegion(e.target.value)
   let sortingFunction = (e) => setSorting(e.target.value)
   
+  const {isDark} = useContext(themeContext)
 
   return (
     <div className={`flex sm:searchBarDesktop searchBarMobile ${isDark ? 'bg-[#202c37]': 'bg-customGray'}`}>

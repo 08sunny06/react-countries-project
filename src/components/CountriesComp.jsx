@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import Country from "./Country";
+import { themeContext } from "../App";
+import { useContext } from "react";
 
-const CountriesComp = ({ isDark }) => {
+const CountriesComp = () => {
   let [countries, setCountry] = useState([]);
   let [search, setSearch] = useState("");
   let [region, setRegion] = useState("");
   let [subRegion, setSubRegion] = useState("");
   let [sorting, setSorting] = useState("")
+  const { isDark } = useContext(themeContext)
 
   console.log(sorting)
 

@@ -1,6 +1,10 @@
 import { MdOutlineDarkMode } from "react-icons/md";
+import { themeContext } from "../App";
+import { useContext } from "react";
 
-const Navbar = ({ isDark, setIsDark }) => {
+const Navbar = () => {
+  const { isDark, setIsDark } = useContext(themeContext)
+
   return (
     <div
       className={`flex justify-between py-6 px-8 shadow ${isDark ? "bg-[#2b3945]" : "bg-white"} ${isDark ? "text-white" : "text-black"}`}>

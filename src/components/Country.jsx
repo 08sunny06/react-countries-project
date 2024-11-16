@@ -1,8 +1,11 @@
 import React from "react";
 import {useNavigate}from 'react-router-dom'
+import { themeContext } from "../App";
+import { useContext } from "react";
 
-const Country = ({ country, isDark }) => {
+const Country = ({ country }) => {
   const navigate = useNavigate()
+  const {isDark} = useContext(themeContext)
 
   return (
     <div className={`sm:countryDesktop my-0 mx-24 shadow rounded-lg cursor-pointer ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`} onClick={() => navigate(`/countryDetails/${country.cca3}`)} >

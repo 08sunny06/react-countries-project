@@ -1,10 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { themeContext } from "../App";
+import { useContext } from "react";
 
-const Borders = ({ borders, isDark }) => {
+const Borders = ({ borders }) => {
   const [country, setCountry] = useState([]);
   let navigate = useNavigate();
+  const {isDark} = useContext(themeContext)
 
   useEffect(() => {
     const fetchData = async () => {
