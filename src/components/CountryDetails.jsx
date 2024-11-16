@@ -37,7 +37,7 @@ const CountryDetails = () => {
       </button>
 
       <div className={`sm:countryDetailsChild `}>
-        <div className="sm:w-[50rem] sm:h-[30rem] w-[28rem] px-2  my-16">
+        <div className="sm:w-[50rem] sm:h-[30rem] w-[25rem] h-[25rem] px-2  my-16">
           {Object.keys(country).length > 0 ? (
             <img
               className="w-full h-full"
