@@ -5,7 +5,12 @@ import { useContext } from "react";
 
 const Country = ({ country }) => {
   const navigate = useNavigate()
-  const {isDark} = useContext(themeContext)
+  const {isDark } = useContext(themeContext);
+  
+  let curencyName = []
+  if(country.currencies){
+    curencyName = Object.values(country.currencies).map(item => item.name)
+  }
 
   return (
     <div className={`sm:countryDesktop my-0 mx-24 shadow rounded-lg cursor-pointer ${isDark ? 'bg-[#2b3945]': 'bg-white'} ${isDark ? 'text-white': 'text-black'}`} onClick={() => navigate(`/countryDetails/${country.cca3}`)} >
@@ -18,8 +23,9 @@ const Country = ({ country }) => {
       <p className="mx-6 my-2">Population: {country.population}</p>
       <p className="mx-6 my-2">Region: {country.region}</p>
       {country.capital && (
-        <p className="mx-6 my-2 sm:cardsCountryBorder mb-20 pb-12 ">Capital: {country.capital}</p>
+        <p className="mx-6 my-2 sm:cardsCountryBorder  ">Capital: {country.capital}</p>
       )}
+      {(country.currencies) && <p className=" mx-6 mb-8 pb-6">Currency: {curencyName.join(', ')} </p>}
     </div>
   );
 };

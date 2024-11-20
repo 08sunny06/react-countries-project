@@ -9,10 +9,9 @@ const CountriesComp = () => {
   let [search, setSearch] = useState("");
   let [region, setRegion] = useState("");
   let [subRegion, setSubRegion] = useState("");
-  let [sorting, setSorting] = useState("")
-  const { isDark } = useContext(themeContext)
-
-  console.log(sorting)
+  let [sorting, setSorting] = useState("");
+  let [currency, setCurrency] = useState("")
+  const { isDark } = useContext(themeContext);
 
   useEffect(() => {
     const fetchCountry = async () => {
@@ -29,13 +28,30 @@ const CountriesComp = () => {
 
   let subRegionData = [];
   countries
-    .map((cou) => cou.subregion)
+    .map((cou) =>
+      region !== "" ? cou.region == region && cou.subregion : cou.subRegion
+    )
     .filter(
       (item) => subRegionData.indexOf(item) == -1 && subRegionData.push(item)
     );
   subRegionData.shift();
 
+  let currencyData = [];
+  countries.filter(
+    (item) => item.region == region && item.subregion == subRegion && item
+  ).map((item) => Object.values(item.currencies).map((item) => item.name))
+  .filter((curen) =>
+    curen.length == 1
+      ? currencyData.indexOf(curen.join("")) == -1 &&
+        currencyData.push(curen.join(""))
+      : curen.filter(
+          (curItem) =>
+            currencyData.indexOf(curItem) == -1 && currencyData.push(curItem)
+        )
+  );
+
   const filteredCountries = countries.filter((country) => {
+    // country.currencies && console.log(Object.values(country.currencies).map(item=>item.name))
     const isInSearch =
       search === "" ||
       country.name.common.toLowerCase().includes(search.toLowerCase());
@@ -43,15 +59,24 @@ const CountriesComp = () => {
       region === "" || country.region.toLowerCase() === region.toLowerCase();
     const isInSubRegion =
       subRegion === "" ||
-      country.subregion && country.subregion.toLowerCase() === subRegion.toLowerCase();
-    return isInSearch && isInRegion && isInSubRegion;
+      (country.subregion &&
+        country.subregion.toLowerCase() === subRegion.toLowerCase());
+    const isCurrency = 
+      currency === "" ||
+      (country.currencies && Object.values(country.currencies).map(item=>item.name).indexOf(currency)>-1)
+    return isInSearch && isInRegion && isInSubRegion && isCurrency;
   });
 
-  sorting!=="" && filteredCountries.sort((a,b) => (
-    sorting=="populationAscen" ? (a.population-b.population) :
-    sorting=="populationDescen" ? (b.population-a.population) :
-    sorting=="areaAscen" ? (a.area-b.area) : (b.area-a.area)
-  ))
+  sorting !== "" &&
+    filteredCountries.sort((a, b) =>
+      sorting == "populationAscen"
+        ? a.population - b.population
+        : sorting == "populationDescen"
+        ? b.population - a.population
+        : sorting == "areaAscen"
+        ? a.area - b.area
+        : b.area - a.area
+    );
 
   return (
     <>
@@ -60,8 +85,11 @@ const CountriesComp = () => {
         setRegion={setRegion}
         setSubRegion={setSubRegion}
         subRegionData={subRegionData}
+        currencyData={currencyData}
         setSorting={setSorting}
+        setCurrency={setCurrency}
         isDark={isDark}
+        region={region}
       />
       <div
         className={`sm:countryTabsDesktop ${
