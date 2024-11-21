@@ -12,7 +12,7 @@ const SearchBar = ({
   setCurrency
 }) => {
   let searchData = (e) => setSearch(e.target.value);
-  let changeRegion = (e) => setRegion(e.target.value);
+  let changeRegion = (e) => {setRegion(e.target.value); setSubRegion(""); setCurrency("") }
   let changeSubRegion = (e) => setSubRegion(e.target.value);
   let sortingFunction = (e) => setSorting(e.target.value);
   let changeCurrency = (e) => setCurrency(e.target.value)
